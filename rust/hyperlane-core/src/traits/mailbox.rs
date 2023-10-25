@@ -54,6 +54,13 @@ pub trait Mailbox: HyperlaneContract + Send + Sync + Debug {
         tx_gas_limit: Option<U256>,
     ) -> ChainResult<TxOutcome>;
 
+    /// Dispatch a message to a destination chain and recipient address.
+    async fn dispatch(
+        &self,
+        message: &HyperlaneMessage,
+        tx_gas_limit: Option<U256>,
+    ) -> ChainResult<TxOutcome>;
+
     /// Estimate transaction costs to process a message.
     async fn process_estimate_costs(
         &self,

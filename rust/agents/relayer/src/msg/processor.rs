@@ -7,7 +7,7 @@ use std::{
 
 use derive_new::new;
 use eyre::Result;
-use hyperlane_base::{db::HyperlaneRocksDB, CoreMetrics};
+use hyperlane_base::{db::HyperlaneRocksDB, settings::matching_list::MatchingList, CoreMetrics};
 use hyperlane_core::{HyperlaneDomain, HyperlaneMessage};
 use prometheus::IntGauge;
 use tokio::{
@@ -17,10 +17,7 @@ use tokio::{
 use tracing::{debug, info_span, instrument, instrument::Instrumented, trace, Instrument};
 
 use super::pending_message::*;
-use crate::{
-    merkle_tree_builder::MerkleTreeBuilder, msg::pending_operation::DynPendingOperation,
-    settings::matching_list::MatchingList,
-};
+use crate::{merkle_tree_builder::MerkleTreeBuilder, msg::pending_operation::DynPendingOperation};
 
 /// Finds unprocessed messages from an origin and submits then through a channel
 /// for to the appropriate destination.
