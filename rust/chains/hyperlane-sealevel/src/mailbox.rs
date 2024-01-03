@@ -531,6 +531,14 @@ impl Mailbox for SealevelMailbox {
         })
     }
 
+    async fn dispatch(
+        &self,
+        message: &HyperlaneMessage,
+        tx_gas_limit: Option<U256>,
+    ) -> ChainResult<TxOutcome> {
+        todo!()
+    }
+
     #[instrument(err, ret, skip(self))]
     async fn process_estimate_costs(
         &self,

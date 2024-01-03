@@ -46,6 +46,12 @@ mock! {
             tx_gas_limit: Option<U256>,
         ) -> ChainResult<TxOutcome> {}
 
+        pub fn dispatch(
+            &self,
+            message: &HyperlaneMessage,
+            tx_gas_limit: Option<U256>,
+        ) -> ChainResult<TxOutcome> {}
+
         pub fn process_estimate_costs(
             &self,
             message: &HyperlaneMessage,
@@ -99,6 +105,14 @@ impl Mailbox for MockMailboxContract {
         tx_gas_limit: Option<U256>,
     ) -> ChainResult<TxOutcome> {
         self.process(message, metadata, tx_gas_limit)
+    }
+
+    async fn dispatch(
+        &self,
+        message: &HyperlaneMessage,
+        tx_gas_limit: Option<U256>,
+    ) -> ChainResult<TxOutcome> {
+        self.dispatch(message, tx_gas_limit)
     }
 
     async fn process_estimate_costs(

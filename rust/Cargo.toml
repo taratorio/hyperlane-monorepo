@@ -8,6 +8,7 @@ members = [
     "chains/hyperlane-sealevel",
     "ethers-prometheus",
     "hyperlane-base",
+    "hyperlane-cli",
     "hyperlane-core",
     "hyperlane-test",
     "sealevel/client",

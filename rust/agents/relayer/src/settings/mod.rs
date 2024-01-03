@@ -12,6 +12,7 @@ use hyperlane_base::{
     impl_loadable_from_settings,
     settings::{
         deprecated_parser::DeprecatedRawSettings,
+        matching_list::MatchingList,
         parser::{RawAgentConf, ValueParser},
         Settings,
     },
@@ -21,10 +22,6 @@ use itertools::Itertools;
 use serde::Deserialize;
 use serde_json::Value;
 use tracing::warn;
-
-use crate::settings::matching_list::MatchingList;
-
-pub mod matching_list;
 
 /// Config for a GasPaymentEnforcementPolicy
 #[derive(Debug, Clone, Default)]

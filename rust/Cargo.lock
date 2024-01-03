@@ -3670,6 +3670,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "hyperlane-cli"
+version = "0.1.0"
+dependencies = [
+ "clap 4.4.6",
+ "ethers",
+ "eyre",
+ "hyperlane-base",
+ "hyperlane-core",
+ "hyperlane-ethereum",
+ "log",
+ "pretty_env_logger",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "tokio",
+ "url",
+]
+
+[[package]]
 name = "hyperlane-core"
 version = "0.1.0"
 dependencies = [

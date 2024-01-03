@@ -9,7 +9,9 @@ use derive_more::AsRef;
 use eyre::Result;
 use hyperlane_base::{
     db::{HyperlaneRocksDB, DB},
-    run_all, BaseAgent, ContractSyncMetrics, CoreMetrics, HyperlaneAgentCore, MessageContractSync,
+    run_all,
+    settings::matching_list::MatchingList,
+    BaseAgent, ContractSyncMetrics, CoreMetrics, HyperlaneAgentCore, MessageContractSync,
     WatermarkContractSync,
 };
 use hyperlane_core::{HyperlaneDomain, InterchainGasPayment, U256};
@@ -32,7 +34,7 @@ use crate::{
         processor::{MessageProcessor, MessageProcessorMetrics},
         serial_submitter::{SerialSubmitter, SerialSubmitterMetrics},
     },
-    settings::{matching_list::MatchingList, RelayerSettings},
+    settings::RelayerSettings,
 };
 
 #[derive(Debug, Hash, PartialEq, Eq, Copy, Clone)]

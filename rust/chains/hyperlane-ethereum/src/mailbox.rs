@@ -273,6 +273,19 @@ where
         );
         fill_tx_gas_params(tx, tx_gas_limit, self.provider.clone(), message.destination).await
     }
+
+    async fn dispatch_contract_call(
+        &self,
+        message: &HyperlaneMessage,
+        tx_gas_limit: Option<U256>,
+    ) -> ChainResult<ContractCall<M, [u8; 32]>> {
+        let tx = self.contract.dispatch(
+            message.destination,
+            message.recipient.to_fixed_bytes(),
+            message.body.to_vec().into(),
+        );
+        fill_tx_gas_params(tx, tx_gas_limit, self.provider.clone(), self.domain.id()).await
+    }
 }
 
 impl<M> HyperlaneChain for EthereumMailbox<M>
@@ -439,6 +452,17 @@ where
         let contract_call = self
             .process_contract_call(message, metadata, tx_gas_limit)
             .await?;
+        let receipt = report_tx(contract_call).await?;
+        Ok(receipt.into())
+    }
+
+    #[instrument(skip(self))]
+    async fn dispatch(
+        &self,
+        message: &HyperlaneMessage,
+        tx_gas_limit: Option<U256>,
+    ) -> ChainResult<TxOutcome> {
+        let contract_call = self.dispatch_contract_call(message, tx_gas_limit).await?;
         let receipt = report_tx(contract_call).await?;
         Ok(receipt.into())
     }
